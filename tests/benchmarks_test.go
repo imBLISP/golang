@@ -22,8 +22,8 @@ func isFieldInValidArray(field string, validInput [5]string) bool {
 	return false
 }
 
-func isFieldInValidHash(field string, hash map[string]bool) bool {
-	if _, ok := hash[field]; ok {
+func isFieldInValidHash(field string, validInput map[string]bool) bool {
+	if _, ok := validInput[field]; ok {
 		return true
 	}
 
@@ -43,10 +43,10 @@ func isFieldInValidSlice(field string, validInput []string) bool {
 var fields = [...]string{"email", "push", "sms", "in_app", "voice"}
 
 func BenchmarkHash(b *testing.B) {
-	hash := map[string]bool{Email: true, Push: true, SMS: true, In_App: true, Voice: true}
+	validInput := map[string]bool{Email: true, Push: true, SMS: true, In_App: true, Voice: true}
 
 	for _, f := range fields {
-		isFieldInValidHash(f, hash)
+		isFieldInValidHash(f, validInput)
 	}
 }
 
